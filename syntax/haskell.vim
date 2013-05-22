@@ -39,6 +39,7 @@
 " hs_allow_hash_operator - Don't highlight seemingly incorrect C
 "			   preprocessor directives but assume them to be
 "			   operators
+" hs_highlight_list_special
 " 
 " 
 
