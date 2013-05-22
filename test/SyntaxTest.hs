@@ -159,3 +159,11 @@ module ExportList (
 
   Inline link to the manual: <http://www.haskell.org/haddock/doc/html/>
 -}
+
+foo = [| asdf + 1 "asdf" $( [| 1 |] ) |]
+
+
+abc = fold' adf
+
+abc' x y = 123
+

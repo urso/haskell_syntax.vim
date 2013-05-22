@@ -40,8 +40,8 @@
 "			   preprocessor directives but assume them to be
 "			   operators
 " hs_highlight_list_special
-" 
-" 
+"
+"
 
 if version < 600
   syn clear
@@ -51,6 +51,8 @@ endif
 
 "syntax sync fromstart "mmhhhh.... is this really ok to do so?
 syntax sync linebreaks=15 minlines=50 maxlines=500
+
+setlocal iskeyword=@,48-57,_,#,'
 
 syn match  hsSpecialChar	contained "\\\([0-9]\+\|o[0-7]\+\|x[0-9a-fA-F]\+\|[\"\\'&\\abfnrtv]\|^[A-Z^_\[\\\]]\)"
 syn match  hsSpecialChar	contained "\\\(NUL\|SOH\|STX\|ETX\|EOT\|ENQ\|ACK\|BEL\|BS\|HT\|LF\|VT\|FF\|CR\|SO\|SI\|DLE\|DC1\|DC2\|DC3\|DC4\|NAK\|SYN\|ETB\|CAN\|EM\|SUB\|ESC\|FS\|GS\|RS\|US\|SP\|DEL\)"
@@ -125,6 +127,8 @@ endif
 if exists("hs_highlight_boolean")
   " Boolean constants from the standard prelude.
   syn keyword hsBoolean True False
+  " Other constants, also from the prelude.
+  syn keyword hsConstant LT GT EQ Nothing Just Left Right
 endif
 
 syn region	hsPackageString	start=+L\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial contained
@@ -231,6 +235,9 @@ sy match hsQQEnd "|\]" contained
 sy match hsQQVarID "\[\$\(.\&[^|]\)*|" contained
 sy match hsQQVarIDNew "\[\(.\&[^|]\)*|" contained
 
+" TH quotations
+sy region hsQuotation matchgroup=hsQuotationBrackets start="\[[edtp]\?|" end="|\]" contains=TOP transparent fold
+
 if exists("hs_highlight_debug")
   " Debugging functions from the standard prelude.
   syn keyword hsDebug undefined error trace
@@ -318,6 +325,7 @@ if version >= 508 || !exists("did_hs_syntax_inits")
   HiLink hsPragma           SpecialComment
   HiLink hsBoolean			  Boolean
   HiLink hsSpecial          Special
+  HiLink hsConstant         Constant
 
   if exists("hs_highlight_types")
       HiLink hsDelimTypeExport  hsType
@@ -355,6 +363,8 @@ if version >= 508 || !exists("did_hs_syntax_inits")
   HiLink hsQQVarIDNew Keyword
   HiLink hsQQEnd   Keyword
   HiLink hsQQContent String
+
+  HiLink hsQuotationBrackets   PreCondit
 
   delcommand HiLink
 endif
