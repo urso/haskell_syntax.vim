@@ -87,7 +87,7 @@ sy region hs_InfixOpFunctionName start="^(" end=")\s*[^:`]\(\W\&\S\&[^'\"`()[\]{
     \ contained keepend contains=hsInnerParen,hs_HlInfixOp
 
 sy match hs_hlFunctionName "[a-z_]\(\S\&[^,\(\)\[\]]\)*" contained 
-sy match hs_FunctionName "^[a-z_]\(\S\&[^,\(\)\[\]]\)*" contained contains=hs_hlFunctionName
+sy match hs_FunctionName "[a-z_]\(\S\&[^,\(\)\[\]]\)*" contained contains=hs_hlFunctionName
 sy match hs_HighliteInfixFunctionName "`[a-z_][^`]*`" contained
 sy match hs_InfixFunctionName "^\S[^=]*`[a-z_][^`]*`"me=e-1 contained contains=hs_HighliteInfixFunctionName,hsType,hsConSym,hsVarSym,hsString,hsCharacter
 sy match hs_HlInfixOp "\(\W\&\S\&[^`(){}'[\]]\)\+" contained contains=hsString
@@ -101,8 +101,8 @@ sy region hs_Function start="^["'a-zA-Z_([{]\(\(.\&[^=]\)\|\(\n\s\)\)*=" end="\(
 
 sy match hs_TypeOp "::"
 sy match hs_TypeOp "∷"
-sy match hs_DeclareFunction "^[a-z_(]\S*\(\s\|\n\)*\(∷\|::\)" contains=hs_FunctionName,hs_OpFunctionName,hs_TypeOp
-
+sy match hs_DeclareFunction "^[a-z_(]\(\S\&[^,\(\)\[\]]\)*\(\s\|\n\)*\(,\(\s\|\n\)*[a-z_(]\(\S\&[^,\(\)\[\]]\)*\(\s\|\n\)*\)*\(∷\|::\)"
+			\ contains=hs_FunctionName,hs_OpFunctionName,hs_TypeOp
 " hi hs_TypeOp guibg=red
 
 " hi hs_InfixOpFunctionName guibg=yellow
